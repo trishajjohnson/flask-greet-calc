@@ -5,91 +5,69 @@ from operations import add, sub, div, mult
 
 app = Flask(__name__)
 
-# @app.route('/add')
+@app.route('/add')
+def add_nums():
 
-# # Original solution
-# # def add_nums():
-# def do_add():
+    """Adds a and b"""
 
-#     """Adds a and b"""
+    a = int(request.args["a"])
+    b = int(request.args["b"])
 
-#     a = int(request.args.get("a"))
-#     # a = int(request.args["a"])
-#     b = int(request.args.get("b"))
-#     # b = int(request.args["b"])
-#     result = add(a, b)
+    result = add(a, b)
 
-#     return str(result) 
-#     # return f"{a} + {b} = {result}" 
+    return f"{a} + {b} = {result}" 
 
-# @app.route('/subtract')
-# def subtract_nums():
+@app.route('/sub')
+def subtract_nums():
 
-#     # original solution framework
-#     """Subtracts a and b"""
+    """Subtracts a and b"""
 
-#     # Instead of a = int(request.args.get("a")
+    a = int(request.args["a"])
+    b = int(request.args["b"])
 
-#     a = int(request.args["a"])
-#     b = int(request.args["b"])
+    result = sub(a, b)
 
-#     # Instead of turning result into string
-#     result = sub(a, b)
+    return f"{a} - {b} = {result}" 
 
-#     return result
-#     # Originally returned a f-string instead of "return = result"
-#     # return f"{a} - {b} = {result}" 
+@app.route('/mult')
+def mult_nums():
 
-# @app.route('/multiply')
-# def mult_nums():
+    """Multiplies a and b"""
 
-#     """Multiplies a and b"""
+    a = int(request.args["a"])
+    b = int(request.args["b"])
 
-#     a = int(request.args["a"])
-#     b = int(request.args["b"])
-#     result = mult(a, b)
+    result = mult(a, b)
 
-#     return str(result) 
-#     # return f"{a} x {b} = {result}" 
+    return f"{a} x {b} = {result}" 
 
-# @app.route('/divide')
-# def div_nums():
+@app.route('/div')
+def div_nums():
 
-#     """"Divides a and b"""
+    """"Divides a and b"""
 
-#     a = int(request.args["a"])
-#     b = int(request.args["b"])
-#     result = div(a, b)
+    a = int(request.args["a"])
+    b = int(request.args["b"])
 
-#     return str(result)
-#     # return f"{a} / {b} = {result}" 
+    result = div(a, b)
 
-# Original Solution
+    return f"{a} / {b} = {result}" 
 
-# @app.route('/<operation>')
-# def do_operation(operation):
-    # """Creating function to do given operation to given numbers a and b"""
+@app.route('/math/<operation>')
+def do_operation(operation):
 
-#     a = int(request.args.get("a"))
-#     b = int(request.args.get("b"))
+    """Creating function to do given operation to given numbers a and b"""
 
-#     result = operation(a, b)
-
-#     return result
-
-operators = {
+    operators = {
         "add": add,
         "sub": sub,
         "mult": mult,
         "div": div,
         }
 
-@app.route("/math/<oper>")
-def do_math(oper):
-    """Do math on a and b."""
+    a = int(request.args["a"])
+    b = int(request.args["b"])
 
-    a = int(request.args.get("a"))
-    b = int(request.args.get("b"))
-    result = operators[oper](a, b)
+    result = operators[operation](a, b)
 
     return str(result)
